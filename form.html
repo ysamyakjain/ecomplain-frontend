@@ -107,7 +107,7 @@
       <div id="margin">Phone: <input id="title" type="text" name="user_phone"></div>
       <textarea placeholder="Enter your complain." id="text" name="user_problem" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height:fit-content; "></textarea>  
       <br>
-      <input id="button" type="submit" value="Create">
+      <input id="button" type="submit" value="submit">
       
     </form>
   
@@ -117,10 +117,10 @@
       $('#title').focus();
       $('#text').autosize();
     });
-
+  
     async function submitForm(event) {
       event.preventDefault();
-
+  
       const formData = new FormData(event.target);
       const data = Object.fromEntries(formData);
       console.log(JSON.stringify(data));
@@ -131,11 +131,13 @@
         },
         body: JSON.stringify(data)
       });
-
+  
       if (response.ok) {
         console.log('Form submitted successfully');
+        window.location.href = 'success.html'; // Redirect to success.html
       } else {
         console.error('Error submitting form', response);
+        window.location.href = 'error.html'; // Redirect to error.html
       }
     }
   </script>
