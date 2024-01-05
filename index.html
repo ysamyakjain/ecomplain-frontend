@@ -1,1 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loading</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+:root {
+    --white: oklch(100% 0 0);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0;
+    height: 100vh;
+    height: 100svh;
+    width: 100vw;
+}
+
+.bg {
+    background: url('indexpage.jpg') no-repeat center center/cover;
+    position: absolute;
+    top: -40px;
+    left: -40px;
+    height: calc(100vh + 80px);
+    height: calc(100svh + 80px);
+    width: calc(100vw + 80px);
+    z-index: -1;
+    filter: blur(0px);
+}
+
+.loading-text {
+    font-size: 50px;
+    color: var(--white);
+}
+
+@media screen and (max-width: 440px) {
+    .bg {
+        background: url('indexpage.jpg') no-repeat center center/cover;
+    }
+}
+
+@media screen and (min-width: 441px) and (max-width: 740px) {
+    .bg {
+        background: url('') no-repeat center center/cover;
+    }
+}
+
+@media screen and (min-width: 741px) and (max-width: 1180px) {
+    .bg {
+        background: url('') no-repeat center center/cover;
+    }
+}
+    
+  </style>
+</head>
+<body>
+    <section class="bg"></section>
+    <div class="loading-text">0%</div>
+  <script>
+    // Wait for 3 seconds (3000 milliseconds) and then redirect
+    setTimeout(function () {
+        window.location.href = 'main.html'; // Replace with the URL you want to redirect to
+    }, 2800);
+  </script>
+
+    <script>
+        const loadText = document.querySelector('.loading-text')
+const background = document.querySelector('.bg')
+
+let load = 0
+
+let interval = setInterval(blurring, 30)
+
+function blurring() {
+    load++
+
+    if(load > 99){
+        clearInterval(interval)
+    }
+    
+    loadText.innerText = `${load}%`
+    loadText.style.opacity = scale(load, 0, 100, 1, 0)
+    background.style.filter = `blur(${scale(load, 0, 100, 40, 0)}px)`
+}
+
+function scale (number, inMin, inMax, outMin, outMax) {
+    return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}
+    </script>
+</body>
+</html>
